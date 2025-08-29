@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Code Breaker – The Array Heist</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>🗝️ Code Breaker – The Array Heist</h1>
+    <p class="tagline">Insert. Delete. Search. Crack the pattern before time runs out!</p>
+  </header>
+
+  <main class="app">
+    <!-- Game HUD -->
+    <section class="hud">
+      <div class="hud-row">
+        <div class="hud-item">
+          <label class="label">Level</label>
+          <select id="levelSelect" class="select">
+            <option value="1">Level 1 — Find any 2-digit pattern</option>
+            <option value="2" selected>Level 2 — Find a 3-digit pattern</option>
+            <option value="3">Level 3 — Find the secret pattern in reverse</option>
+          </select>
+        </div>
+
+        <div class="hud-item secret">
+          <label class="label">Secret Pattern</label>
+          <div id="secretPattern" class="secret-chiplist">[ ?, ?, ? ]</div>
+        </div>
+
+        <div class="hud-item timer">
+          <label class="label">Time Attack</label>
+          <div class="timer-row">
+            <label class="switch">
+              <input type="checkbox" id="timeToggle" />
+              <span class="slider"></span>
+            </label>
+            <button id="startBtn" class="btn btn-outline">Start</button>
+            <div id="timer" class="timer-disp">60s</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Board -->
+    <section class="board">
+      <div class="array-wrap">
+        <div id="arrayGrid" class="array-grid" aria-label="Array grid of 10 slots" role="list">
+          <!-- 10 slots rendered by JS -->
+        </div>
+        <!-- Chips live inside the same grid; JS adds them -->
+      </div>
+      <div id="confettiHost" class="confetti-host" aria-hidden="true"></div>
+    </section>
+
+    <!-- Controls -->
+    <section class="controls">
+      <div class="panel">
+        <h2>Operations</h2>
+
+        <div class="ops-row">
+          <div class="op">
+            <div class="op-title">Insert at Index</div>
+            <div class="op-fields">
+              <input id="insertIndex" type="number" class="input" min="0" max="9" placeholder="Index (0–9)"/>
+              <input id="insertValue" type="number" class="input" min="0" max="9" placeholder="Value (0–9)"/>
+              <button id="insertBtn" class="btn">Insert</button>
+            </div>
+            <small>Shifts elements to the right. Rightmost value may be dropped if full.</small>
+          </div>
+
+          <div class="op">
+            <div class="op-title">Delete at Index</div>
+            <div class="op-fields">
+              <input id="deleteIndex" type="number" class="input" min="0" max="9" placeholder="Index (0–9)"/>
+              <button id="deleteBtn" class="btn btn-warn">Delete</button>
+            </div>
+            <small>Removes element and shifts left.</small>
+          </div>
+        </div>
+
+        <div class="ops-row">
+          <div class="op op-wide">
+            <div class="op-title">Search for Pattern</div>
+            <div class="op-fields">
+              <input id="patternInput" type="text" class="input" placeholder="e.g., 2,1,4"/>
+              <button id="searchBtn" class="btn btn-outline">Search</button>
+              <button id="resetBtn" class="btn btn-ghost">Reset</button>
+            </div>
+            <small>Highlights each segment as it scans. Use commas only (0–9 digits).</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Messages -->
+    <section class="messages">
+      <div id="msg" class="msg" aria-live="polite">Welcome, trainee. Your mission awaits…</div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p>Made with ❤️ to teach insertions, deletions, and linear subarray search.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
